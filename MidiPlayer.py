@@ -22,7 +22,7 @@ class MIDIPlayer:
 		print "using instrument %s" %instrument
 		self.player.set_instrument(instrument,port)
 
-	def go(self, note, duration):
+	def playNote(self, note, duration):
 		self.player.note_on(note,127)
 		time.sleep(duration)
 		self.player.note_off(note,127)
@@ -32,6 +32,6 @@ if __name__ == '__main__':
 	notes=MIDIPlayer.Notes
 	fur=[(76,notes.quarter),(75,notes.quarter),(76,notes.quarter),(75,notes.quarter),(76,notes.quarter),(71,notes.quarter),(74,notes.quarter),(72,notes.quarter),(69,notes.whole)]
 	for x in fur:
-		musicPlyr.go(x[0],x[1].value)
+		musicPlyr.playNote(x[0],x[1].value)
 	del musicPlyr
 	pygame.midi.quit()

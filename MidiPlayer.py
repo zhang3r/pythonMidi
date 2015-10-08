@@ -1,20 +1,10 @@
 import pygame
 import pygame.midi
 import time
-from enum import Enum
+from MusicTheory import Notes
 
 class MIDIPlayer:
 	
-	class Notes(Enum):
-		sixtyforth=0.015625
-		thirtysecondth=0.03125
-		sixteenth=0.0625
-		eighth=0.125
-		quarter=0.25
-		half=0.5
-		whole=1
-
-
 	def __init__(self, port, instrument, tempo=60):
 		pygame.midi.init()
 		
@@ -35,7 +25,7 @@ class MIDIPlayer:
 
 if __name__ == '__main__':
 	musicPlyr = MIDIPlayer(0, 0,90)
-	notes=MIDIPlayer.Notes
+	notes=Notes
 	fur=[(76,notes.quarter),(75,notes.quarter),(76,notes.quarter),(75,notes.quarter),(76,notes.quarter),(71,notes.quarter),(74,notes.quarter),(72,notes.quarter),(69,notes.whole)]
 	for x in fur:
 		musicPlyr.playNote(x[0],x[1].value)

@@ -16,8 +16,12 @@ pygame is a python library that can play midi files among others
 
 visit [pygame] (http://www.pygame.org/download.shtml) to install
 
-
 ---
+## Run exmaple
+
+1. open terminal to directory
+2. run python MidiPlayer.py or python FibMIDIGen.py
+
 ##Resources
 [MIDI Notes Chart] (https://newt.phys.unsw.edu.au/jw/graphics/notes.GIF)
 

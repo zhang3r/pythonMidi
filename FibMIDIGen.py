@@ -9,7 +9,7 @@ class FibMelodyGen:
 	def __init__(self, stop, start=0, key=Cmajor):
 		self.key=key
 		self.fib=self.__fib(start,stop)
-		self.tempo=90
+		self.tempo=60
 
 
 	def generate(self):
@@ -26,8 +26,7 @@ class FibMelodyGen:
 		#4. loudness
 		 
 		#notes using fib
-		for x in self.fib:
-			mNotes.append((self.key.scale.value[x&7],notes.quarter))
+		map(lambda x: mNotes.append((self.key.scale.value[x&7],1.0/(2<<(x&3)))),self.fib)
 
 		#duration for notes
 
@@ -49,7 +48,7 @@ if __name__ == '__main__':
 	fibMelodyGenerator = FibMelodyGen(48)
 	fibMelody=fibMelodyGenerator.generate()
 	musicPlyr = MIDIPlayer(0, 0,fibMelodyGenerator.tempo)
-	map(lambda x: musicPlyr.playNote(x[0],x[1].value), fibMelody)
+	map(lambda x: musicPlyr.playNote(x[0],x[1]), fibMelody)
 		
 	del musicPlyr
 	pygame.midi.quit()

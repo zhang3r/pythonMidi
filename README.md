@@ -4,13 +4,16 @@ simple python midi player using pygame
 python version: 2.7
 
 ##Setup
-
+These files require the use of Enum and pygame libraries
 #####Enum
- pip install enum34
+Enum was added in python 3.4 but has been backported to previous python versions
+
+to install: pip install enum34
 
 ---
 #####pygame
-http://www.pygame.org/download.shtml
+pygame is a python library that can play midi files among others
+visit [pygame] (http://www.pygame.org/download.shtml) to install
 
 
 ---

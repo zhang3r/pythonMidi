@@ -13,6 +13,7 @@ to install: pip install enum34
 ---
 #####pygame
 pygame is a python library that can play midi files among others
+
 visit [pygame] (http://www.pygame.org/download.shtml) to install
 
 

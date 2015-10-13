@@ -12,7 +12,7 @@ class FibMelodyGen:
 		self.tempo=60
 
 
-	def generate(self):
+	def generateMelody(self):
 		notes = Notes
 		mNotes=[]
 		#mDuration=[]
@@ -32,6 +32,27 @@ class FibMelodyGen:
 
 		return mNotes
 
+	def generateHarmony(self):
+		notes = Notes
+		mNotes=[]
+		#mDuration=[]
+		mBpm=self.tempo
+		mloudness=127
+		#1. use fib to generate melody
+		#things we can change
+		#1. duration
+		#2. pitch (notes)
+		#3. bpm
+		#4. loudness
+		 
+		#notes using fib
+		mNotes=[(self.key.chords.value[x&7],notes.half.value) if x % 2==0 else ((-1,),0) for x in self.fib]
+		#map(lambda x: mNotes.append((self.key.scale.value[x&7],notes.half.value)),self.fib)
+
+		#duration for notes
+
+		return mNotes
+
 
 	def __fib(self, start, stop):
 		self.fib=[]
@@ -46,9 +67,16 @@ class FibMelodyGen:
 if __name__ == '__main__':
 	#8 note melody in c major
 	fibMelodyGenerator = FibMelodyGen(48)
-	fibMelody=fibMelodyGenerator.generate()
-	musicPlyr = MIDIPlayer(0, 0,fibMelodyGenerator.tempo)
-	map(lambda x: musicPlyr.playNote(x[0],x[1]), fibMelody)
+	fibMelody=fibMelodyGenerator.generateMelody()
+	fibHarmony=fibMelodyGenerator.generateHarmony()
+	# print fibHarmony
+	melodyPlyr = MIDIPlayer(0, 0,fibMelodyGenerator.tempo)
+	#harmonyPlyr = MIDIPlayer(port=2, instrument=0,tempo=fibMelodyGenerator.tempo)
+	for x,y in zip(fibMelody, fibHarmony):
 		
-	del musicPlyr
+		melodyPlyr.playChord(y[0]+(x[0],),x[1])
+		#melodyPlyr.playChord(y[0],y[1])
+	
+	del melodyPlyr
+	#del harmonyPlyr
 	pygame.midi.quit()

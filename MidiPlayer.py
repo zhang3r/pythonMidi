@@ -5,21 +5,33 @@ from MusicTheory import Notes
 
 class MIDIPlayer:
 	
-	def __init__(self, port, instrument, tempo=60):
+	def __init__(self, device_id, instrument, tempo=60):
 		pygame.midi.init()
 		
-		print "using port %s" %port
-		self.player=pygame.midi.Output(port,0)
+		print "using device id %s" %device_id
+		self.player=pygame.midi.Output(device_id)
 		#piano
 		self.player.tempo=60.0/tempo
 		print "using instrument %s" %instrument
-		self.player.set_instrument(instrument,port)
+		self.player.set_instrument(instrument,device_id)
 	# note less than means rest
 	def playNote(self, note, duration, loudness=127):
 		if note >= 21:
 			self.player.note_on(note,loudness)
 			time.sleep(self.player.tempo*duration)
 			self.player.note_off(note,loudness)
+		else:
+			time.sleep(duration)
+
+	def playChord(self, notes, duration, loudness=127):
+		if notes >= 21:
+			for n in notes:
+				if(n>=21):
+					self.player.note_on(n,loudness)
+			time.sleep(self.player.tempo*duration)
+			for n in notes:
+				if(n>=21):
+					self.player.note_off(n,loudness)
 		else:
 			time.sleep(duration)
 
